@@ -1,7 +1,7 @@
 required packages:
  sudo (for the initialisation of the database)
- mono-2.0-runtime (>= Mono 2.6.7), also winforms (Ict.Common.* dlls depend on it)
- on Debian eg.: apt-get -t lenny-backports install mono-runtime libmono-data2.0-cil libmono-system-web2.0-cil libmono-system-runtime2.0-cil libmono-winforms2.0-cil
+ mono-openpetra: special build with a patch for .net Remoting; 
+    for CentOS, Debian, Ubuntu, Fedora see installation instructions here: http://software.opensuse.org/download.html?project=home%3Atpokorra%3Aopenpetra&amp;package=mono-openpetra
  one of the following RDBMS:
    postgresql (recommended, default)
    mysql
@@ -20,6 +20,7 @@ Run that file: . config.sh
 then run: . setup.sh
 
 To load the initial database:
+  /etc/init.d/MyOpenPetra createdb
   /etc/init.d/MyOpenPetra init
 
 To start the server, type:

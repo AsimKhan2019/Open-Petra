@@ -13,7 +13,7 @@ fi
 
 if [ ! -d $OpenPetraOrgPath ]
 then
-  export mono=/opt/novell/mono/bin
+  export mono=/opt/mono-openpetra/mono/bin
   export OpenPetraOrgPath=/usr/local/openpetraorg
   export CustomerName=DefaultTOREPLACE
   export OPENPETRA_LocationKeyFile=
@@ -177,6 +177,9 @@ case "$1" in
     restore)
         restore
         ;;
+    createdb)
+        createdb
+        ;;
     init)
         init
         ;;
@@ -190,7 +193,7 @@ case "$1" in
         menu
         ;;
     *)
-        echo "Usage: $0 {start|stop|restart|menu|backup|restore|createdb|init}"
+        echo "Usage: $0 {start|stop|restart|menu|backup|restore|createdb|init|loadYmlGz|addUser}"
         exit 1
         ;;
 esac
