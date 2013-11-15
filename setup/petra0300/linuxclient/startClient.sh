@@ -1,4 +1,5 @@
 #!/bin/bash
+. /opt/mono-openpetra/env.sh
 cd bin30
 if [ ! -f ../etc30/publickey.xml ]
 then
