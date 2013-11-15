@@ -302,7 +302,7 @@ public static string InsertRecursiveAllFilesFromSubdirectoriesForDeletion(string
   copy startclient sh und remote config
   
   <copy file="${dir.root}/setup/petra${PetraRelease}/linuxclient/startClient.sh"
-              tofile="${setupDir}/startClient.sh"/>
+              tofile="${setupDir}/startClient.sh" outputencoding="latin1"/>
   <copy file="${tempdir}/publickey.xml" tofile="${setupDir}/etc30/publickey-sample.xml"/>
   <copy file="${dir.root}/setup/petra${PetraRelease}/linuxclient/PetraClientRemote.config"
               tofile="${setupDir}/etc30/PetraClientRemote.config">
@@ -429,12 +429,12 @@ public static string InsertRecursiveAllFilesFromSubdirectoriesForDeletion(string
     </if>
     <property name="OpenPetraOrgPath" value="$OpenPetraOrgPath"/>
     <copy file="${Config.file}"
-        tofile="${setupDir}/config-sample.sh" overwrite="true">
+        tofile="${setupDir}/config-sample.sh" overwrite="true" outputencoding="latin1">
         <filterchain>
             <expandproperties />
         </filterchain>
     </copy>
-    <copy file="${dir.root}/setup/petra${PetraRelease}/linuxserver/${LinuxTargetDistribution}/setup.sh" tofile="${setupDir}/setup.sh"/>
+    <copy file="${dir.root}/setup/petra${PetraRelease}/linuxserver/${LinuxTargetDistribution}/setup.sh" tofile="${setupDir}/setup.sh" outputencoding="latin1"/>
 
     <!-- ***************  create the web.config file ***************  -->
     <property name="Config.file" value="${dir.root}/setup/petra${PetraRelease}/linuxserver/${LinuxTargetDistribution}/web.config.my"/>
@@ -493,7 +493,7 @@ public static string InsertRecursiveAllFilesFromSubdirectoriesForDeletion(string
     <copy file="${dir.root}/setup/petra${PetraRelease}/linuxserver/INSTALL"
                 tofile="${setupDir}/INSTALL"/>
     <copy file="${dir.root}/setup/petra${PetraRelease}/linuxserver/${LinuxTargetDistribution}/openpetraorg-server.sh"
-                tofile="${setupDir}/openpetraorg-server.sh"/>
+                tofile="${setupDir}/openpetraorg-server.sh" outputencoding="latin1"/>
     <if test="${platform::is-unix()}">
       <!-- change the executable flag -->
       <ExecCmd program="sh" commandline="/C &quot;chmod a+x ${setupDir}/*.sh&quot;"/>
