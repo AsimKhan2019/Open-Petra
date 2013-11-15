@@ -2,9 +2,9 @@
 // DO NOT REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 //
 // @Authors:
-//       christiank
+//       christiank, timop
 //
-// Copyright 2004-2012 by OM International
+// Copyright 2004-2013 by OM International
 //
 // This file is part of OpenPetra.org.
 //
@@ -242,11 +242,21 @@ namespace Ict.Common.Controls
             }
         }
 
+        bool DuringResize = false;
+
+        /// resize is called for all dashboards, even those invisible?
         private void TUcoTaskGroupResize(object sender, EventArgs e)
         {
+            if (DuringResize)
+            {
+                return;
+            }
+
+            DuringResize = true;
+
             string ControlsList = "\r\n" + flpTaskGroup.Name + "\r\n";
 
-            // Cause the FlowLayoutPanel to resize as well (stangely this doesn't happen automatically!)
+            // Cause the FlowLayoutPanel to resize as well (strangely this doesn't happen automatically!)
             if (this.Width < MaxTaskWidth)
             {
 //                this.Width = MaxTaskWidth;
@@ -268,7 +278,29 @@ namespace Ict.Common.Controls
                                 "; Size: " + SingleControl.Size.ToString() + "\r\n";
             }
 
+            // TODOMono: Timotheus: workaround for Mono bug. not really finished yet: sometimes too much space. but at least all icons are visible.
+            // https://bugzilla.xamarin.com/show_bug.cgi?id=2912
+            // A FlowLayoutPanel with AutoSize set to true and Docking to Top or Bottom
+            // doesn't resize properly if the child controls break to multiple lines. The size
+            // of the FlowLayoutPanel stays the same.
+            if (Utilities.DetermineExecutingCLR() == TExecutingCLREnum.eclrMono)
+            {
+                int height = 1;
+
+                foreach (Control SingleControl in flpTaskGroup.Controls)
+                {
+                    if (SingleControl.Location.Y + SingleControl.Size.Height > height)
+                    {
+                        height = SingleControl.Location.Y + SingleControl.Size.Height;
+                    }
+                }
+
+                flpTaskGroup.Height = height;
+                this.Height = height + this.nlnGroupTitle.Height;
+            }
+
 //TLogging.Log(ControlsList + "\r\n" + "\r\n");
+            DuringResize = false;
         }
 
         #endregion

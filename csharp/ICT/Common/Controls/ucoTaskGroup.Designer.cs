@@ -4,7 +4,7 @@
 // @Authors:
 //       christiank
 //
-// Copyright 2004-2012 by OM International
+// Copyright 2004-2013 by OM International
 //
 // This file is part of OpenPetra.org.
 //
@@ -70,11 +70,17 @@ namespace Ict.Common.Controls
             this.nlnGroupTitle.Name = "nlnGroupTitle";
             this.nlnGroupTitle.Size = new System.Drawing.Size(805, 22);
             this.nlnGroupTitle.TabIndex = 2;
+
             //
             // flpTaskGroup
             //
-            this.flpTaskGroup.AutoSize = true;
-            this.flpTaskGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            // Timotheus: workaround for Mono autosize bug
+            if (Utilities.DetermineExecutingCLR() != TExecutingCLREnum.eclrMono)
+            {
+                this.flpTaskGroup.AutoSize = true;
+                this.flpTaskGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            }
+
 //			this.flpTaskGroup.BackColor = System.Drawing.Color.White;
             this.flpTaskGroup.Dock = System.Windows.Forms.DockStyle.Top;
             this.flpTaskGroup.Location = new System.Drawing.Point(0, 22);

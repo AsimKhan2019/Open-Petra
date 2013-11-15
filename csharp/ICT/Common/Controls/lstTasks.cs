@@ -4,7 +4,7 @@
 // @Authors:
 //       christiank (original, different implementation by timotheusp)
 //
-// Copyright 2004-2012 by OM International
+// Copyright 2004-2013 by OM International
 //
 // This file is part of OpenPetra.org.
 //
@@ -160,8 +160,13 @@ namespace Ict.Common.Controls
                     // Add TaskGroup to this UserControls' Controls
                     TaskGroup.Dock = DockStyle.Top;
                     TaskGroup.Margin = new Padding(3);
-                    TaskGroup.AutoSize = true;
-                    TaskGroup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
+                    // Timotheus: workaround for Mono autosize bug
+                    if (Utilities.DetermineExecutingCLR() != TExecutingCLREnum.eclrMono)
+                    {
+                        TaskGroup.AutoSize = true;
+                        TaskGroup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    }
 
                     TaskGroup.TaskClicked += new EventHandler(SingleTask_ExecuteTask);
                     TaskGroup.TaskSelected += new EventHandler(SingleTask_TaskSelected);

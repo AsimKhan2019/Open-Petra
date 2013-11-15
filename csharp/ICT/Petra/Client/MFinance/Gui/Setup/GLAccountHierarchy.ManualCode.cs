@@ -777,6 +777,12 @@ namespace Ict.Petra.Client.MFinance.Gui.Setup
             String strNewDetailAccountCode = txtDetailAccountCode.Text;
             bool changeAccepted = false;
 
+            // TODOMono on Mono, somehow the events fire differently, and we have this problem
+            if (strOldDetailAccountCode == null)
+            {
+                return true;
+            }
+
             if (strNewDetailAccountCode != FRecentlyUpdatedDetailAccountCode)
             {
                 if (strNewDetailAccountCode != strOldDetailAccountCode)
